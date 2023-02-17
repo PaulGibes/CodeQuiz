@@ -1,5 +1,35 @@
 nav {
   display: flex;
   justify-content: space-between;
-  padding: 5px;
+  padding: 10px;
+}
+
+nav button {
+  max-height: 30px;
+}
+
+main {
+  padding: 20vh;
+  text-align: center;
+}
+
+div {
+  display: inline;
+}
+
+#questionSection {
+  display: none;
+}
+
+#scoresSection {
+  display: none;
+}
+
+li {
+  list-style: none;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem;
 }

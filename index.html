@@ -9,16 +9,31 @@
   </head>
   <body>
     <nav>
-      <button class="highscores">Highscores</button>
-      <h2>Time: <span class="seconds">60</span></h2>
+      <button class="scoresBtn">Highscores</button>
+      <h2>
+        Time:
+        <div class="seconds">60</div>
+      </h2>
     </nav>
     <main>
-      <h1>Code Quiz</h1>
-      <p>
-        Try to answer the following questions within the time limit.<br />
-        Incorrect answers will penalize your score/time!
-      </p>
-      <button class="start">Start Quiz</button>
+      <div id="startSection">
+        <h1>Code Quiz</h1>
+        <p>
+          Try to answer the following questions within the time limit.<br />
+          Incorrect answers will penalize your score/time!
+        </p>
+        <button class="startBtn">Start Quiz</button>
+      </div>
+      <div id="questionSection">
+        <h2 class="questionEl"></h2>
+        <ol>
+          <li><button class="optionBtn" id="o1"></button></li>
+          <li><button class="optionBtn" id="o2"></button></li>
+          <li><button class="optionBtn" id="o3"></button></li>
+          <li><button class="optionBtn" id="o4"></button></li>
+        </ol>
+      </div>
+      <div id="scoresSection"><h2>High Scores</h2></div>
     </main>
     <script src="./assets/javascript/script.js"></script>
   </body>
