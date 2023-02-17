@@ -128,4 +128,7 @@ function showScores() {
 
 startBtn.addEventListener("click", start);
 scoresBtn.addEventListener("click", showScores);
-optionBtn.addEventListener("click", nextQuestion);
+o1.addEventListener("click", nextQuestion);
+o2.addEventListener("click", nextQuestion);
+o3.addEventListener("click", nextQuestion);
+o4.addEventListener("click", nextQuestion);
