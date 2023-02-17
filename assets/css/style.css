@@ -21,7 +21,16 @@ div {
   display: none;
 }
 
+.optionBtn {
+  min-width: 100px;
+  margin: 10px;
+}
+
 #scoresSection {
+  display: none;
+}
+
+#resultsSection {
   display: none;
 }
 
