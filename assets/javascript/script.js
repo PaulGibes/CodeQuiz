@@ -3,7 +3,9 @@
 // Node.textContent
 var startBtn = document.querySelector(".startBtn");
 var scoresBtn = document.querySelector(".scoresBtn");
+var submitBtn = document.querySelector(".submitBtn");
 var optionBtn = document.querySelector(".optionBtn");
+var clearScoresBtn = document.querySelector(".clearScoreBtn");
 var questionNumber = document.querySelector("#questionNumber");
 var questionEl = document.querySelector(".questionEl");
 var buttonListEl = document.querySelector("#buttons");
@@ -15,6 +17,7 @@ var o2 = document.querySelector("#o2");
 var o3 = document.querySelector("#o3");
 var o4 = document.querySelector("#o4");
 var index = 0;
+var scores = JSON.parse(localStorage.getItem("scores")) || [];
 var defANewPage = 0;
 var questions = [
   {
@@ -39,7 +42,7 @@ var questions = [
   },
   {
     Q: "How long was the 100 Years' War?",
-    O: ["100", "116 years", "Still going on", "100 years"],
+    O: ["89 years", "116 years", "Still going on", "100 years"],
     A: "116 years",
   },
   {
@@ -63,7 +66,7 @@ var questions = [
     A: ["S", "C"],
   },
   {
-    Q: "One 18 inch pizza is bigger than two 12 inch pizzas",
+    Q: "One 18 inch pizza is bigger than two 12 inch pizzas.",
     O: ["True", "False"],
     A: "True",
   },
@@ -111,6 +114,7 @@ function nextQuestion() {
 function endGame() {
   document.querySelector("#questionSection").style = "display:none";
   document.querySelector("#resultsSection").style = "display:block";
+  document.querySelector("#score").textContent = time;
   clearInterval(timeInterval);
 }
 
@@ -118,6 +122,18 @@ function showScores() {
   if (defANewPage === 0) {
     document.querySelector("#startSection").style = "display:none";
     document.querySelector("#scoresSection").style = "display:block";
+    clearScoresBtn.addEventListener("click", function () {
+      localStorage.clear();
+      scores = [];
+      document.querySelector("#savedScores").innerHTML = "";
+    });
+
+    document.querySelector("#savedScores").innerHTML = "";
+    for (let i = 0; i < scores.length; i++) {
+      var li = document.createElement("li");
+      document.querySelector("#savedScores").appendChild(li);
+      li.textContent = scores[i];
+    }
     defANewPage++;
   } else {
     document.querySelector("#startSection").style = "display:block";
@@ -126,8 +142,15 @@ function showScores() {
   }
 }
 
+function saveScores() {
+  scores.push(document.querySelector("#name").value + " : " + time);
+
+  localStorage.setItem("scores", JSON.stringify(scores));
+}
+
 startBtn.addEventListener("click", start);
 scoresBtn.addEventListener("click", showScores);
+submitBtn.addEventListener("click", saveScores);
 o1.addEventListener("click", nextQuestion);
 o2.addEventListener("click", nextQuestion);
 o3.addEventListener("click", nextQuestion);

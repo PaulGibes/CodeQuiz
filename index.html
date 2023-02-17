@@ -31,19 +31,26 @@
         </h2>
         <h3 class="questionEl"></h3>
         <ul>
-        <li><button class="optionBtn" id="o1"></button></li>
-        <li><button class="optionBtn" id="o2"></button></li>
-        <li><button class="optionBtn" id="o3"></button></li>
-        <li><button class="optionBtn" id="o4"></button></li>
-    </ul>
+          <li><button class="optionBtn" id="o1"></button></li>
+          <li><button class="optionBtn" id="o2"></button></li>
+          <li><button class="optionBtn" id="o3"></button></li>
+          <li><button class="optionBtn" id="o4"></button></li>
+        </ul>
       </div>
       <div id="resultsSection">
         <h2>Results</h2>
+        <p>Your final score is <span id="score"></span></p>
         <form>
-            <label for ="name">Enter your Name: </label>
-            <input type="text" name=""name id="name">
-    </div>
-      <div id="scoresSection"><h2>High Scores</h2></div>
+          <label for="name">Enter your Name: </label>
+          <input type="text" name="" name id="name" />
+          <button class="submitBtn">Click Here</button>
+        </form>
+      </div>
+      <div id="scoresSection">
+        <h2>High Scores</h2>
+        <ul id="savedScores"></ul>
+        <button class="clearScoreBtn">Clear Scores</button>
+      </div>
     </main>
     <script src="./assets/javascript/script.js"></script>
   </body>
