@@ -21,54 +21,54 @@ var scores = JSON.parse(localStorage.getItem("scores")) || [];
 var defANewPage = 0;
 var questions = [
   {
-    Q: "What is the chance you will get this question correct guessing randomly?",
-    O: ["50%", "25%", "0%", "50%"],
-    A: "50%",
+    text: "What is the chance you will get this question correct guessing randomly?",
+    option: ["50%", "25%", "0%", "50%"],
+    answer: ["50%"],
   },
   {
-    Q: "If you clean the vacuum cleaner does that make you the vacuum cleaner?",
-    O: ["what!?", "Yes.", "IDK", "no?"],
-    A: "Yes.",
+    text: "If you clean the vacuum cleaner does that make you the vacuum cleaner?",
+    option: ["what!?", "Yes.", "IDK", "no?"],
+    answer: ["Yes."],
   },
   {
-    Q: "Do straws have one hole or two?",
-    O: ["1", "2"],
-    A: "1",
+    text: "Do straws have one hole or two?",
+    option: ["1", "2"],
+    answer: ["1"],
   },
   {
-    Q: "What occurs once in a minute, twice in a moment, but never in an hour?",
-    O: ["A minute", "50%", "M", "A full circle"],
-    A: "M",
+    text: "What occurs once in a minute, twice in a moment, but never in an hour?",
+    option: ["A minute", "A clock", "M", "A full circle"],
+    answer: ["M"],
   },
   {
-    Q: "How long was the 100 Years' War?",
-    O: ["89 years", "116 years", "Still going on", "100 years"],
-    A: "116 years",
+    text: "How long was the 100 Years' War?",
+    option: ["89 years", "116 years", "Still going on", "100 years"],
+    answer: ["116 years"],
   },
   {
-    Q: "What does the K in K-Mart stand for?",
-    O: ["Potassium", "Kyle's", "Kwality", "Nothing"],
-    A: "Nothing",
+    text: "What does the K in K-Mart stand for?",
+    option: ["Potassium", "Kyle's", "Kwality", "Nothing"],
+    answer: ["Nothing"],
   },
   {
-    Q: "What number do you get when you multiply all the numbers on a roulette wheel?",
-    O: [">1,000,000", "525,600", "0", "3.154e+7"],
-    A: "0",
+    text: "What number do you get when you multiply all the numbers on a roulette wheel?",
+    option: ["A lot", "525,600", "0", "3.154e+7"],
+    answer: ["0"],
   },
   {
-    Q: "If you divide 30 by a half and add ten, what would be the result?",
-    O: ["25", "70", "45", "3.154e+7"],
-    A: "70",
+    text: "If you divide 30 by a half and add ten, what would be the result?",
+    option: ["25", "70", "45", "3.154e+7"],
+    answer: ["70"],
   },
   {
-    Q: "Is the S or C silent in the word Scent?",
-    O: ["S", "C", "Both", "Neither"],
-    A: ["S", "C"],
+    text: "Is the S or C silent in the word Scent?",
+    option: ["S", "C", "Both", "Neither"],
+    answer: ["S", "C"],
   },
   {
-    Q: "One 18 inch pizza is bigger than two 12 inch pizzas.",
-    O: ["True", "False"],
-    A: "True",
+    text: "One 18 inch pizza is bigger than two 12 inch pizzas.",
+    option: ["True", "False"],
+    answer: ["True"],
   },
 ];
 
@@ -76,7 +76,7 @@ function start() {
   timeInterval = setInterval(function () {
     time--;
     timeEl.textContent = time;
-    if (time === 0) {
+    if (time <= 0) {
       endGame();
     }
   }, 1000);
@@ -85,30 +85,45 @@ function start() {
   document.querySelector("#startSection").style = "display:none";
   document.querySelector("#questionSection").style = "display:block";
 
-  nextQuestion();
+  displayQuestion();
 }
 
-function nextQuestion() {
-  if (index < questions.length) {
-    questionNumber.textContent = 1 + index;
-    questionEl.textContent = questions[index].Q;
-    if (questions[index].O.length === 4) {
-      document.querySelector("#o3").style = "display:inline";
-      document.querySelector("#o4").style = "display:inline";
-      o1.textContent = questions[index].O[0];
-      o2.textContent = questions[index].O[1];
-      o3.textContent = questions[index].O[2];
-      o4.textContent = questions[index].O[3];
-    } else {
-      o1.textContent = questions[index].O[0];
-      o2.textContent = questions[index].O[1];
-      document.querySelector("#o3").style = "display:none";
-      document.querySelector("#o4").style = "display:none";
+function nextQuestion(event) {
+  var choice = event.target.textContent;
+
+  if (!questions[index].answer.includes(choice)) {
+    time -= 5;
+    timeEl.textContent = time;
+    if (time <= 0) {
+      endGame();
     }
+  }
+
+  index++;
+
+  if (index < questions.length) {
+    displayQuestion();
   } else {
     endGame();
   }
-  index++;
+}
+
+function displayQuestion() {
+  questionNumber.textContent = index + 1;
+  questionEl.textContent = questions[index].text;
+  if (questions[index].option.length === 4) {
+    document.querySelector("#o3").style = "display:inline";
+    document.querySelector("#o4").style = "display:inline";
+    o1.textContent = questions[index].option[0];
+    o2.textContent = questions[index].option[1];
+    o3.textContent = questions[index].option[2];
+    o4.textContent = questions[index].option[3];
+  } else {
+    o1.textContent = questions[index].option[0];
+    o2.textContent = questions[index].option[1];
+    document.querySelector("#o3").style = "display:none";
+    document.querySelector("#o4").style = "display:none";
+  }
 }
 
 function endGame() {
